@@ -3,6 +3,8 @@ void keyPressed() {
     println("0 as mode zero for Setup mode");
     println("1 as mode one for Masked Art");
     println("2 as mode two for Unmasked Art");
+    println("c as mode Camera for Camera only mode");
+    println("space as start music and visual effect");
     return;
   }
   if (key == '0') {
@@ -25,6 +27,7 @@ void keyPressed() {
   if (key == 'w') {
     println("mode wait, waiting mode");
     runningMode = 999;
+    playMusicStop();
     return;
   }
   if (key == 'c') {

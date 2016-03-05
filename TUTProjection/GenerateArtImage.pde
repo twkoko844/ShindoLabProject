@@ -56,7 +56,7 @@ class LogoImage {
   }
   void update() {    
     float ra = radians(map(posX, 0, width, 0, 180));
-    vecx = abs((int)(80 * cos(ra)));
+    vecx = abs((int)(110 * cos(ra)));
     if (vecx < 10) vecx = 10;
     posX += vecx;
     posY += vecy;
@@ -70,7 +70,6 @@ class LogoImage {
     myEpochTime=millis();
     startTime = 0;
     logotable = (logotable+1) % 5;
-    print(posX, posY);
   }
 }
 

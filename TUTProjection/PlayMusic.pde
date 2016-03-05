@@ -4,7 +4,11 @@ void playMusicSetup() {
   player = minim.loadFile("music.mp3");
 }
 void playMusicPlay() {
-  player.rewind();
   player.play();
+  player.rewind();
+}
+void playMusicStop() {
+  player.pause();
+  player.rewind();
 }
 

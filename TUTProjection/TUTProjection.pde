@@ -18,7 +18,7 @@ PImage generatedArt;
 // Play Mode setting.
 int playSection = 0;
 int playEpocTime;
-int[] sectionTime = {0, 20000, 32500};
+int[] sectionTime = {0, 20000, 32000};
 
 //
 // Set Default
