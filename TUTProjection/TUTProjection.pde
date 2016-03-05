@@ -44,6 +44,7 @@ int EpochTime;
 int maxImages;
 PImage bodyImage;
 float minRate = 0.3;
+int logotable = 0;
 
 // Generate Fine Art Image
 int fa_maxlines;
@@ -57,6 +58,9 @@ AudioPlayer player;
 
 // EarthVectorImage class
 EarthVector earth;
+
+//tglrise
+ArrayList<TglRise> ary_tgl;
 
 
 void setup() {
@@ -98,15 +102,14 @@ void setup() {
   playMusicSetup();
   // create EarthVector object
   earth = new EarthVector("earth.svg", "earth_color.png");
+  // triangle riser
+  ary_tgl = new ArrayList<TglRise>();
 
   resetArtEpochTime();
 }
 
 void draw() {
-  for (int i = 0; i < maxImages; i++) {
-    logoImage[i].update();
-  }
-
+  
   imageMode(CORNER);
   background(0); // Anyway, always black
 
@@ -151,7 +154,8 @@ void draw() {
   if (runningMode == 1) {
     // Generate Art Image
     //generatedArt = GenerateArtImage
-    generatedArt = GenerateFineArtImage();
+    //generatedArt = GenerateFineArtImage();
+    generatedArt = drawTglRise();
     // Masked Art Check
     //screenImage = generatedArt;
     generatedArt.mask(mask);

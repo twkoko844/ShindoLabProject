@@ -1,44 +1,9 @@
 PImage GenerateArtImage() {
-  return realGenerateArtImage();
-}
-PImage realGenerateArtImage() {
-  //PImage tmpimage=pimage;
-  pg.beginDraw();
-  pg.background(0);
-  pg.pushMatrix();
-  pg.imageMode(CENTER);
-  pg.image(bodyImage, width/2 + transdistance, height/2, bodyImage.width*0.8, bodyImage.height*0.8);
-  pg.popMatrix();
-  for (int i=0; i < maxImages; i++) {
-    logoImage[i].show();
-  }
-  pg.endDraw();
-  for (int i=0; i < maxImages; i++) {
-    logoImage[i].update();
-  }
-
-  //tmpimage.pixels = pg.pixels;
-  //tmpimage.updatePixels();
-  return pg.get();
-}
-PImage debugGenerateArtImage() {
-  //PImage tmpimage=pimage;
-  pg.beginDraw();
-  pg.background(0);
-  pg.pushMatrix();
-
-  pg.ellipse(width/2, height/2, 300, 300);
-  pg.popMatrix();
-  pg.endDraw();
-  /*
-  tmpimage.pixels = pg.pixels;
-   tmpimage.updatePixels();
-   */
-  return pg.get();
+  return logoLotate();
 }
 
 void generateArtInit() {
-  int xpos = width/2 + (int)transdistance;
+  int xpos = 0;
   logoImage[0]=new LogoImage("toyota.jpg", xpos, height/2, 0.7, 1000);
   logoImage[1]=new LogoImage("seven.jpg", xpos, height/2, 0.7, 3000);
   logoImage[2]=new LogoImage("IBM.jpg", xpos, height/2, 0.7, 5000);
@@ -51,6 +16,20 @@ void generateArtInit() {
 void resetArtEpochTime() {
   EpochTime=millis();
 }
+
+PImage logoLotate() {
+  pg.beginDraw();
+  pg.background(0);
+  pg.pushMatrix();
+  pg.imageMode(CENTER);
+  pg.image(bodyImage, width/2 + transdistance, height/2, bodyImage.width*0.8, bodyImage.height*0.8);
+  pg.popMatrix();
+  logoImage[logotable].show();
+  pg.endDraw();
+  logoImage[logotable].update();
+  return pg.get();
+}
+
 class LogoImage {
   PImage myimage;
   float posX, posY, startX, startY, vecx, vecy;
@@ -58,42 +37,40 @@ class LogoImage {
   int startTime;
   int myEpochTime;
   LogoImage(String filename, int x, int y, float myrate, int starttime) {
-    myEpochTime=EpochTime;
+    myEpochTime = EpochTime;
     myimage = loadImage(filename);
-    posX=startX=x;
-    posY=startY=y;
-    vecx = (round(random(0,1))*2 -1 ) * random(5,10);
-    vecy = (round(random(0,1))*2 -1 )  * random(5,10);
-    startTime=starttime;
-    rate=myrate;
+    posX=startX=0;
+    posY=startY=height/2;
+    vecx = 5;
+    vecy = 0;
+    startTime=0;
+    rate = myrate;
   }
   void show() {
     if (millis() - myEpochTime > startTime) {
       pg.pushMatrix();
       pg.imageMode(CENTER);
       pg.image(myimage, posX, posY, myimage.width*rate, myimage.height*rate);
-      //ellipse(posX,posY,100,100);
       pg.popMatrix();
     }
   }
-  void update() {
-    if (millis() - myEpochTime < startTime) {
-      return;
-    }
+  void update() {    
+    float ra = radians(map(posX, 0, width, 0, 180));
+    vecx = abs((int)(80 * cos(ra)));
+    if (vecx < 10) vecx = 10;
     posX += vecx;
     posY += vecy;
     if ( posX < 0 || posX > width || posY < 0 || posY > height ) {
-      reset();
-    }
-    rate +=0.001;
-    if ( rate > 1.0 ) {
       reset();
     }
   }
   void reset() {
     posX=startX;
     posY=startY;
-    rate=minRate;
     myEpochTime=millis();
+    startTime = 0;
+    logotable = (logotable+1) % 5;
+    print(posX, posY);
   }
 }
+

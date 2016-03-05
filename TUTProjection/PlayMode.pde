@@ -3,7 +3,7 @@ PImage playMode() {
   currentTime = millis() - playEpocTime;
   if (currentTime <= sectionTime[1]) {
     // Section 1 Show Fine Art
-    generatedArt = GenerateFineArtImage();
+    generatedArt = drawTglRise();
     generatedArt.mask(mask);
   }
   if (currentTime > sectionTime[1] && currentTime <= sectionTime[2]) {
