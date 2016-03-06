@@ -50,7 +50,7 @@ class LogoImage {
     if (millis() - myEpochTime > startTime) {
       pg.pushMatrix();
       pg.imageMode(CENTER);
-      pg.image(myimage, posX, posY, myimage.width*rate, myimage.height*rate);
+      pg.image(myimage, posX + transdistance, posY, myimage.width*rate, myimage.height*rate);
       pg.popMatrix();
     }
   }
@@ -60,14 +60,14 @@ class LogoImage {
     if (vecx < 10) vecx = 10;
     posX += vecx;
     posY += vecy;
-    if ( posX < 0 || posX > width || posY < 0 || posY > height ) {
+    if (posX < 0 || posX > width || posY < 0 || posY > height) {
       reset();
     }
   }
   void reset() {
-    posX=startX;
-    posY=startY;
-    myEpochTime=millis();
+    posX = startX;
+    posY = startY;
+    myEpochTime = millis();
     startTime = 0;
     logotable = (logotable+1) % 5;
   }
