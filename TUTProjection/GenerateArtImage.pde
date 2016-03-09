@@ -4,11 +4,12 @@ PImage GenerateArtImage() {
 
 void generateArtInit() {
   int xpos = 0;
-  logoImage[0]=new LogoImage("toyota.jpg", xpos, height/2, 0.7, 1000);
-  logoImage[1]=new LogoImage("seven.jpg", xpos, height/2, 0.7, 3000);
-  logoImage[2]=new LogoImage("IBM.jpg", xpos, height/2, 0.7, 5000);
-  logoImage[3]=new LogoImage("uniqlo.gif", xpos, height/2, 0.7, 7000);
-  logoImage[4]=new LogoImage("apple.jpg", xpos, height/2, 0.7, 9000);
+  float r = 0.7;
+  logoImage[0]=new LogoImage("toyota.jpg", xpos, height/2, r, 1000);
+  logoImage[1]=new LogoImage("seven.jpg", xpos, height/2, r, 3000);
+  logoImage[2]=new LogoImage("IBM.jpg", xpos, height/2, r, 5000);
+  logoImage[3]=new LogoImage("uniqlo.gif", xpos, height/2, r, 7000);
+  logoImage[4]=new LogoImage("apple.jpg", xpos, height/2, r, 9000);
   maxImages=5;
   bodyImage = loadImage("nikkei-vertical.jpg");
   EpochTime=millis();
@@ -22,7 +23,8 @@ PImage logoLotate() {
   pg.background(0);
   pg.pushMatrix();
   pg.imageMode(CENTER);
-  pg.image(bodyImage, width/2 + transdistance, height/2, bodyImage.width*0.8, bodyImage.height*0.8);
+  float r = 1;
+  pg.image(bodyImage, width/2 + transdistance, height/2, bodyImage.width * r, bodyImage.height * r);
   pg.popMatrix();
   logoImage[logotable].show();
   pg.endDraw();
