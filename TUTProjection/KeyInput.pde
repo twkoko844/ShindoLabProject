@@ -4,6 +4,7 @@ void keyPressed() {
     println("1 as mode one for Masked Art");
     println("2 as mode two for Unmasked Art");
     println("c as mode Camera for Camera only mode");
+    println("w as mode Wait for waiting and screen black");
     println("space as start music and visual effect");
     return;
   }
@@ -40,7 +41,6 @@ void keyPressed() {
     runningMode = 100;
     GenerateFineArtImageReset();
     playMusicPlay();
-    playEpocTime = millis();
     return;
   }
 }

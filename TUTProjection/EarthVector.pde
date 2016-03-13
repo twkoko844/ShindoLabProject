@@ -47,6 +47,7 @@ class EarthVector {
         //println(alpha);
         pg.imageMode(CENTER);
         pg.image(img, width/2, height/2);
+        pg.imageMode(CORNER);
       }
     }
     pg.popMatrix();

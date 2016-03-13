@@ -4,6 +4,7 @@ void playMusicSetup() {
   player = minim.loadFile("music.mp3");
 }
 void playMusicPlay() {
+  playEpocTime = millis();
   player.play();
   player.rewind();
 }
