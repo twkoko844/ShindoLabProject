@@ -62,12 +62,10 @@ EarthVector earth;
 //tglrise
 ArrayList<TglRise> ary_tgl;
 
-
 void setup() {
   int x = 1280;
   int y = 720;
   size(displayWidth, displayHeight);
-  //size(x, y);
   //frameRate(30);
 
   // Load Logo Image
@@ -83,7 +81,8 @@ void setup() {
       println(i + ":" + cameras[i]);
     }
     cam = new Capture(this, cameras[0]); //640x480 17th camera
-    cam.width = 1280;cam.height = 720;
+    cam.width = x;
+    cam.height = y;
     cam.start();
   }
   //print("cam.width:");
@@ -109,32 +108,32 @@ void setup() {
 }
 
 void draw() {
-  
-  imageMode(CORNER);
-  background(0); // Anyway, always black
 
-  // show or hide controllpanel
-  if (runningMode == 0 || runningMode == 12) {
-    // Setup Mode or CameraMode
-    controllpanel.update();
-  } else {
-    controllpanel.hide();
-  }
+  background(0); // Anyway, always black
+  imageMode(CORNER);
+  
+  // Waiting mode
+  if (runningMode == 999) {
+    //delay(20);
+    return;
+  } 
 
   if (cam.available() == true) {
     cam.read();
     cv.loadImage(cam);
   }
 
-  //waiting mode
-  if (runningMode == 999) {
-    //delay(20);
-    return;
-  } 
-  
+  // show or hide controllpanel
+  if (runningMode == 0 || runningMode == 12) {
+    // Setup Mode or Camera Mode
+    controllpanel.update();
+  } else {
+    controllpanel.hide();
+  }
+
   // run and show image
   if (runningMode == 12) {
-    //Camera Only Mode
+    // Camera Only Mode
     cv.useColor(RGB);
     cameraImage = cv.getSnapshot();
     cameraImage = imageScaling(cameraImage, scale);
@@ -153,11 +152,9 @@ void draw() {
   }
   if (runningMode == 1) {
     // Generate Art Image
-    //generatedArt = GenerateArtImage
     //generatedArt = GenerateFineArtImage();
     generatedArt = drawTglRise();
     // Masked Art Check
-    //screenImage = generatedArt;
     generatedArt.mask(mask);
     screenImage = generatedArt;
   }
@@ -173,10 +170,13 @@ void draw() {
   if (screenImage == null) {
     // unknown error.
     println("screenImage is null");
-    screenImage = cam;
+    cv.useColor(RGB);
+    screenImage = cv.getSnapshot();
+    screenImage = imageScaling(cameraImage, scale);
   }
 
   image(screenImage, 0, 0, width, height); // show image on screen
+  
   if (runningMode == 0 ) {
     // show center line
     stroke(255, 0, 0, 50);

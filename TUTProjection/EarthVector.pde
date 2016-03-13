@@ -29,7 +29,7 @@ class EarthVector {
       float currenttime = millis() - earth.epochtime;
       pg.shapeMode(CENTER);
       float x;
-      if(currenttime > 5000) {
+      if (currenttime > 5000) {
         x = 5000;
       } else {
         x = currenttime;
@@ -41,7 +41,7 @@ class EarthVector {
 
       if (currenttime >= 5000) {
         float y = currenttime - 5000;
-        
+
         float alpha = map(y, 0, 5000, 0, 255);
         pg.tint(255, alpha);
         //println(alpha);

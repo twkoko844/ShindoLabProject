@@ -16,9 +16,9 @@ PImage artMasking(PImage artimage, PImage mask) {
 PImage imageScaling(PImage src, float scale) {
   PImage result;
   imageMode(CENTER);
-  image(src,width/2,height/2,src.width*scale, src.height*scale);
+  image(src, width/2, height/2, src.width*scale, src.height*scale);
   imageMode(CORNER);
-  result = get(0,0,width,height);
+  result = get(0, 0, width, height);
   background(0);
   return result;
 }
