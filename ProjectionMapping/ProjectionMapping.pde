@@ -32,7 +32,3 @@ OpenCV getNewOpenCV(int x, int y) {
   return new OpenCV(this, x, y);
 }
 
-public void captureEvent(Capture c) {
-  c.read();
-}
-

@@ -102,7 +102,7 @@ public class Controller {
   public void displayMaskedImage() {
     PImage screenImage = art.generateArtImage();
     PImage mask = cam.getMaskImage();
-    screenImage = artMasking(screenImage, mask);
+    screenImage.mask(mask);
      image(screenImage, 0, 0, width, height);
     //image(cam.getMaskImage(), 0, 0);
   }
